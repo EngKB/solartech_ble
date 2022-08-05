@@ -15,6 +15,12 @@ final List<int> checkStatusCommand = [
   0x01,
 ];
 
+final List<int> lockStatusCommand = [
+  0x20,
+  0x00,
+  0x1D,
+];
+
 final List<int> unlockCommand = [
   0x60,
   0x07,

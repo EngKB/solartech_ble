@@ -18,6 +18,19 @@ class SolarTechBluetoothDataSource {
     );
   }
 
+  void checkLockStatus(String deviceId) {
+    List<int> buffer = [];
+    buffer += lockStatusCommand;
+    flutterReactiveBle.writeCharacteristicWithResponse(
+      QualifiedCharacteristic(
+        characteristicId: bleWriteUuid,
+        serviceId: bleServiceUuid,
+        deviceId: deviceId,
+      ),
+      value: buffer,
+    );
+  }
+
   void unlock(String deviceId, String password) {
     List<int> buffer = [];
     buffer += unlockCommand;

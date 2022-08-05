@@ -94,7 +94,14 @@ class _DevicePageState extends State<DevicePage> {
                         SolarTechBluetoothDataSource()
                             .checkStatus(widget.deviceId);
                       },
-                      child: const Text('status'),
+                      child: const Text('device status'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        SolarTechBluetoothDataSource()
+                            .lock(widget.deviceId);
+                      },
+                      child: const Text('lock status'),
                     ),
                   ],
                 );
