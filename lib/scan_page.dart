@@ -44,7 +44,7 @@ class _ScanPageState extends State<ScanPage> {
     scanResult = flutterReactiveBle.scanForDevices(
       withServices: [],
     ).listen((event) {
-      if (event.id == 'E8:9F:61:A5:7B:CF') {
+      if (event.id == 'DB:E3:78:BE:4C:93') {
         if (!loResult.any((element) => element.id == event.id)) {
           setState(() {
             loResult.add(event);

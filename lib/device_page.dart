@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:solartech/constants.dart';
+import 'package:solartech/solartech_bluetooth_data_source.dart';
 
 class DevicePage extends StatefulWidget {
   final String deviceId;
@@ -32,13 +33,15 @@ class _DevicePageState extends State<DevicePage> {
       if (event.connectionState == DeviceConnectionState.connected) {
         _dataStream = FlutterReactiveBle()
             .subscribeToCharacteristic(
-              QualifiedCharacteristic(
-                characteristicId: bleNotifyUuid,
-                serviceId: bleServiceUuid,
-                deviceId: widget.deviceId,
-              ),
-            )
-            .listen((data) {});
+          QualifiedCharacteristic(
+            characteristicId: bleNotifyUuid,
+            serviceId: bleServiceUuid,
+            deviceId: widget.deviceId,
+          ),
+        )
+            .listen((data) {
+          print(data);
+        });
       }
     });
   }
@@ -74,15 +77,23 @@ class _DevicePageState extends State<DevicePage> {
                   children: [
                     const Text('connected'),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        SolarTechBluetoothDataSource()
+                            .unlock(widget.deviceId, '654321');
+                      },
                       child: const Text('unlock'),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        SolarTechBluetoothDataSource().lock(widget.deviceId);
+                      },
                       child: const Text('lock'),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        SolarTechBluetoothDataSource()
+                            .checkStatus(widget.deviceId);
+                      },
                       child: const Text('status'),
                     ),
                   ],
