@@ -21,6 +21,7 @@ class SolarTechBluetoothDataSource {
   void checkLockStatus(String deviceId) {
     List<int> buffer = [];
     buffer += checkLockStatusCommand;
+    print(buffer.length);
     flutterReactiveBle.writeCharacteristicWithoutResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
@@ -66,6 +67,7 @@ class SolarTechBluetoothDataSource {
       0x0a,
       0x3c,
     ];
+    print(buffer.length);
     flutterReactiveBle.writeCharacteristicWithoutResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
