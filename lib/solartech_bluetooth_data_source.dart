@@ -5,9 +5,9 @@ import 'constants.dart';
 class SolarTechBluetoothDataSource {
   final FlutterReactiveBle flutterReactiveBle = FlutterReactiveBle();
 
-  void checkStatus(String deviceId) {
+  void checkDeviceStatus(String deviceId) {
     List<int> buffer = [];
-    buffer += checkStatusCommand;
+    buffer += checkDeviceStatusCommand;
     flutterReactiveBle.writeCharacteristicWithoutResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
@@ -20,7 +20,7 @@ class SolarTechBluetoothDataSource {
 
   void checkLockStatus(String deviceId) {
     List<int> buffer = [];
-    buffer += lockStatusCommand;
+    buffer += checkLockStatusCommand;
     flutterReactiveBle.writeCharacteristicWithoutResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
