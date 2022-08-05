@@ -9,13 +9,13 @@ final bleWriteUuid =
 final bleNotifyUuid =
     Uuid.parse('27760003-999c-4d6a-9fc4-c7272be10900'.toUpperCase());
 
-final List<int> checkStatusCommand = [
+final List<int> checkDeviceStatusCommand = [
   0x20,
   0x00,
   0x01,
 ];
 
-final List<int> lockStatusCommand = [
+final List<int> checkLockStatusCommand = [
   0x20,
   0x00,
   0x1D,
