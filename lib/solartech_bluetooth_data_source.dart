@@ -8,7 +8,7 @@ class SolarTechBluetoothDataSource {
   void checkStatus(String deviceId) {
     List<int> buffer = [];
     buffer += checkStatusCommand;
-    flutterReactiveBle.writeCharacteristicWithResponse(
+    flutterReactiveBle.writeCharacteristicWithoutResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
         serviceId: bleServiceUuid,
@@ -21,7 +21,7 @@ class SolarTechBluetoothDataSource {
   void checkLockStatus(String deviceId) {
     List<int> buffer = [];
     buffer += lockStatusCommand;
-    flutterReactiveBle.writeCharacteristicWithResponse(
+    flutterReactiveBle.writeCharacteristicWithoutResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
         serviceId: bleServiceUuid,
@@ -44,7 +44,7 @@ class SolarTechBluetoothDataSource {
       0x0a,
       0x3c,
     ];
-    flutterReactiveBle.writeCharacteristicWithResponse(
+    flutterReactiveBle.writeCharacteristicWithoutResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
         serviceId: bleServiceUuid,
@@ -66,7 +66,7 @@ class SolarTechBluetoothDataSource {
       0x0a,
       0x3c,
     ];
-    flutterReactiveBle.writeCharacteristicWithResponse(
+    flutterReactiveBle.writeCharacteristicWithoutResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
         serviceId: bleServiceUuid,
