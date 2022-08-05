@@ -8,7 +8,7 @@ class SolarTechBluetoothDataSource {
   void checkDeviceStatus(String deviceId) {
     List<int> buffer = [];
     buffer += checkDeviceStatusCommand;
-    flutterReactiveBle.writeCharacteristicWithoutResponse(
+    flutterReactiveBle.writeCharacteristicWithResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
         serviceId: bleServiceUuid,
@@ -22,7 +22,7 @@ class SolarTechBluetoothDataSource {
     List<int> buffer = [];
     buffer += checkLockStatusCommand;
     print(buffer.length);
-    flutterReactiveBle.writeCharacteristicWithoutResponse(
+    flutterReactiveBle.writeCharacteristicWithResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
         serviceId: bleServiceUuid,
@@ -35,8 +35,8 @@ class SolarTechBluetoothDataSource {
   void unlock(String deviceId, String password) {
     List<int> buffer = [];
     buffer += unlockCommand;
-    buffer += [0x01];
-    buffer = password.split('').map((e) => int.parse(e)).toList();
+    buffer += [12];
+    buffer += getPassword(password);
     buffer += [
       0xAF,
       0x04,
@@ -45,7 +45,8 @@ class SolarTechBluetoothDataSource {
       0x0a,
       0x3c,
     ];
-    flutterReactiveBle.writeCharacteristicWithoutResponse(
+    print(buffer.length);
+    flutterReactiveBle.writeCharacteristicWithResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
         serviceId: bleServiceUuid,
@@ -58,6 +59,7 @@ class SolarTechBluetoothDataSource {
   void lock(String deviceId) {
     List<int> buffer = [];
     buffer += lockCommand;
+    buffer += [7];
     buffer += [0x00];
     buffer += [
       0xAF,
@@ -68,7 +70,7 @@ class SolarTechBluetoothDataSource {
       0x3c,
     ];
     print(buffer.length);
-    flutterReactiveBle.writeCharacteristicWithoutResponse(
+    flutterReactiveBle.writeCharacteristicWithResponse(
       QualifiedCharacteristic(
         characteristicId: bleWriteUuid,
         serviceId: bleServiceUuid,
@@ -76,5 +78,12 @@ class SolarTechBluetoothDataSource {
       ),
       value: buffer,
     );
+  }
+  List<int> getPassword(String password) {
+    List<int> pass = [];
+    for (int i = 0; i < password.length; i++) {
+      pass.add(password.codeUnitAt(i));
+    }
+    return pass;
   }
 }
